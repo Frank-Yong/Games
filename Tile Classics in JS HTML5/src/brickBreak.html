@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="encoding" content="utf-8">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+    </head>
+    <body>
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+<script>
+    const PADDLE_WIDTH = 100, PADDLE_HEIGHT = 10;
+    const BALL_RADIUS = 10;
+    const BRICK_W = 80;
+    const BRICK_H = 20;
+    const BRICK_GAP = 2;
+    const BRICK_COLS = 10;
+    const BRICK_ROWS = 14;
+
+    var canvas, canvasContext;
+    var ballX, ballY;
+    var ballXSpeed = 8, ballYSpeed = 6;
+    var paddleX;
+    var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
+
+	window.onload = function() {
+        canvas = document.getElementById('gameCanvas');
+        canvasContext = canvas.getContext('2d');
+
+        bricksReset();
+        ballReset();
+        paddleX = canvas.width/2;
+
+		// these next few lines set up our game logic and render to happen 30 times per second
+        var framesPerSecond = 30;
+        setInterval(function() {
+            moveEverything();
+            drawEverything();
+        }, 1000/framesPerSecond);
+
+		/*
+		canvas.addEventListener('touchmove', function(evt) {
+            // var mousePos = calculateMousePos(evt);
+            // paddleX = mousePos.x-(PADDLE_WIDTH/2);
+
+            var touches = evt.changedTouches;
+            for (let i = 0; i < touches.length; i++) {
+                paddleX = touches[i].pageX-(PADDLE_WIDTH/2);
+            }
+        });
+		*/
+		
+        canvas.addEventListener('mousemove', function(evt) {
+            var mousePos = calculateMousePos(evt);
+            paddleX = mousePos.x-(PADDLE_WIDTH/2);
+	    });
+    }
+	
+    function moveEverything() {
+        ballX += ballXSpeed;
+        ballY += ballYSpeed;
+
+        if (ballX <= 0 || ballX >= canvas.width) {
+            ballXSpeed *= -1;
+        } 
+
+        if (ballY <= 0) {
+            ballYSpeed *= -1;
+        } 
+        
+        if (ballY >= canvas.height*0.9-PADDLE_HEIGHT-BALL_RADIUS 
+            && ballX > paddleX 
+            && ballX < paddleX+PADDLE_WIDTH
+            && ballYSpeed > 0) {
+            var deltaX = ballX-(paddleX+PADDLE_WIDTH/2);
+            ballXSpeed = deltaX * 0.35;
+            ballYSpeed *= -1;
+        }
+
+        if (ballY >= canvas.height) {
+            ballReset();
+        }
+    }
+
+    function drawEverything() {
+        // clear the game view by filling it with black
+        colorRect(0, 0, canvas.width, canvas.height, 'black');
+        drawBricks();
+
+        var chkColor = document.getElementById("chkColor")
+        if (chkColor.checked) {
+            colorRect(paddleX, canvas.height*0.9-PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 'blue')
+            colorCircle(ballX, ballY, BALL_RADIUS, 'yellow');
+        } else {
+            colorRect(paddleX, canvas.height*0.9-PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 'white')
+            colorCircle(ballX, ballY, BALL_RADIUS, 'white');
+        }
+
+        colorText("PaddleX: " + paddleX, 100, canvas.height-100, 'white');
+    }
+
+    function drawBricks() {
+        for (var x = 0; x < BRICK_COLS; x++) {
+            for (var y = 0; y < BRICK_ROWS; y++) {
+                if (isBrickAtTileCoord(x, y)) {
+                    colorRect(x * BRICK_W, y * BRICK_H, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, 'blue');
+                    // colorText("X:" + x + ",Y:" + y, posX, posY, 'red');
+                }
+            }
+        }
+    }
+
+    function isBrickAtTileCoord(brickTileCol, brickTileRow) {
+        var brickIndex = brickTileCol + BRICK_COLS * brickTileRow;
+        return (brickGrid[brickIndex] == 1);
+    }
+
+    function ballReset() {
+        ballX = canvas.width/2;
+        ballY = canvas.height/2;
+    }
+
+    function bricksReset() {
+        for (var i = 0; i < BRICK_COLS * BRICK_ROWS; i++) {
+            if (Math.random() < 0.5) {
+                brickGrid[i] = 1;
+            } else {
+                brickGrid[i] = 0;
+            }
+        }
+    }
+
+    function calculateMousePos(evt) {
+        var rect = canvas.getBoundingClientRect(), root = document.documentElement;
+
+        // account for the margins, canvas position on page, scroll amount, etc.
+        var mouseX = evt.clientX - rect.left - root.scrollLeft;
+        var mouseY = evt.clientY - rect.top - root.scrollTop;
+        return {
+            x: mouseX,
+            y: mouseY
+        };
+    }
+    
+    function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
+        canvasContext.fillStyle = fillColor;
+        canvasContext.fillRect(topLeftX,topLeftY, boxWidth, boxHeight);
+    }
+
+    function colorCircle(centerX, centerY, radius, fillColor) {
+        canvasContext.fillStyle = fillColor;
+        canvasContext.beginPath();
+        canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+        canvasContext.fill();
+    }
+
+    function colorText(showWords, textX, textY, fillColor) {
+        canvasContext.fillStyle = fillColor;
+        canvasContext.textAlign = 'left';
+        canvasContext.textBaseline = 'top';
+        canvasContext.fillText(showWords, textX, textY);
+    }
+
+</script>
+    <div>
+    Color:&nbsp;<input id="chkColor" type="checkbox">
+    </div>
+    </body>
+</html>
