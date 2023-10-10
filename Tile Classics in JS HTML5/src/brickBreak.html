@@ -86,13 +86,14 @@
     function drawEverything() {
         // clear the game view by filling it with black
         colorRect(0, 0, canvas.width, canvas.height, 'black');
-        drawBricks();
 
         var chkColor = document.getElementById("chkColor")
         if (chkColor.checked) {
-            colorRect(paddleX, canvas.height*0.9-PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 'blue')
+            drawBricks('blue');
+            colorRect(paddleX, canvas.height*0.9-PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 'red')
             colorCircle(ballX, ballY, BALL_RADIUS, 'yellow');
         } else {
+            drawBricks('white');
             colorRect(paddleX, canvas.height*0.9-PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 'white')
             colorCircle(ballX, ballY, BALL_RADIUS, 'white');
         }
@@ -100,11 +101,11 @@
         colorText("PaddleX: " + paddleX, 100, canvas.height-100, 'white');
     }
 
-    function drawBricks() {
+    function drawBricks(fillColor) {
         for (var x = 0; x < BRICK_COLS; x++) {
             for (var y = 0; y < BRICK_ROWS; y++) {
                 if (isBrickAtTileCoord(x, y)) {
-                    colorRect(x * BRICK_W, y * BRICK_H, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, 'blue');
+                    colorRect(x * BRICK_W, y * BRICK_H, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, fillColor);
                     // colorText("X:" + x + ",Y:" + y, posX, posY, 'red');
                 }
             }
