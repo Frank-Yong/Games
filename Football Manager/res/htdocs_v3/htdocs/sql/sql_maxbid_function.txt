@@ -1,0 +1,39 @@
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spMaxBid`(IN `pid` INT(11), OUT `userid` INT(11), OUT `S` INT(11))
+    NO SQL
+BEGIN
+
+	SELECT MAX(Suma) as 'S', userid 
+    FROM playerbid
+    WHERE playerid=pid
+    GROUP BY playerid;
+    
+ 
+ END$$
+
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `MaxBid`(`pid` INT(11)) RETURNS varchar(200) CHARSET latin1
+BEGIN
+	DECLARE ssuma int(11);
+    DECLARE uteam varchar(200);
+	DECLARE res varchar(200);
+    
+	SET res = (SELECT CONCAT_WS(';',a.Suma, b.teamname, b.id)
+    FROM playerbid a
+    LEFT OUTER JOIN user b
+    ON a.userid=b.id
+    WHERE a.Suma=(SELECT Max(Suma) FROM playerbid WHERE playerid=pid) AND a.activ=1 AND playerid=pid);
+    
+    
+    
+    RETURN res;
+ 
+ END$$
+
+DELIMITER ;

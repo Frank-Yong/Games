@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="verifyownership" content="8f99080d1e16bdb4bf3ff41a3c798f50" />
+<title>Javascript drag and drop</title>
+<link rel="alternate" type="application/rss+xml" title="webtoolkit.info RSS2 Feed" href="http://www.webtoolkit.info/feed" />
+<link rel="pingback" href="http://www.webtoolkit.info/xmlrpc.php" />
+<link rel="stylesheet" href="http://www.webtoolkit.info/wp-content/themes/webtoolkitNEW/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://www.webtoolkit.info/wp-content/themes/webtoolkitNEW/css/style1.css" type="text/css" media="screen"/>
+<script type="text/javascript" src="drag2.js"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="webtoolkit.info &raquo; Javascript drag and drop Comments Feed" href="http://www.webtoolkit.info/demo/javascript-drag-and-drop/feed" />
+<link rel='stylesheet' id='wp-postratings-css'  href='http://www.webtoolkit.info/wp-content/plugins/wp-postratings/postratings-css.css?ver=1.50' type='text/css' media='all' />
+
+<link rel='stylesheet' id='contact-form-7-css'  href='http://www.webtoolkit.info/wp-content/plugins/contact-form-7/stylesheet.css?ver=2.0.7' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='http://www.webtoolkit.info/wp-content/plugins/download-monitor/page-addon/styles.css?ver=3.0.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.webtoolkit.info/wp-includes/js/jquery/jquery.js?ver=1.4.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.webtoolkit.info/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.webtoolkit.info/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='webtoolkit.info' href='http://www.webtoolkit.info' />
+<link rel='up' title='Demo' href='http://www.webtoolkit.info/demo' />
+<link rel='prev' title='Sortable table' href='http://www.webtoolkit.info/demo/sortable-table' />
+<link rel='next' title='Rounded corners CSS' href='http://www.webtoolkit.info/demo/rounded-corners-css' />
+<meta name="generator" content="WordPress 3.0.1" />
+<link rel='canonical' href='http://www.webtoolkit.info/demo/javascript-drag-and-drop' />
+
+<!-- All in One SEO Pack 1.6.8.1 by Michael Torbert of Semper Fi Web Design[339,373] -->
+<meta name="description" content="Start drag process... &laquo; Back" />
+<link rel="canonical" href="http://www.webtoolkit.info/demo/javascript-drag-and-drop" />
+<!-- /all in one seo pack -->
+
+<link rel="stylesheet" href="http://www.webtoolkit.info/wp-content/plugins/wp-syntax/wp-syntax.css" type="text/css" media="screen" />
+<!--[if IE 6]>
+    <script src="http://www.webtoolkit.info/wp-content/themes/webtoolkitNEW/DD_belatedPNG.js"></script>
+    <script>
+      /* EXAMPLE */
+      DD_belatedPNG.fix('*');
+    </script>
+    
+ <![endif]-->
+</head>
+<body id='top'>
+<!-- BuySellAds.com Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- END BuySellAds.com Ad Code -->
+
+<div class="wrapper" id='wrapper_head'>
+	<!-- BuySellAds.com Zone Code -->
+        <div id="bsap_1240747" class="bsarocks bsap_c4bb71779db1d810a9cb3f0af7f2592d" align="center" style="margin-top:10px;"></div>
+        <!-- END BuySellAds.com Zone Code -->
+
+	<div class="center">
+		
+
+		<div id="head">
+		
+			<h2 class="logo logoimg"><a href="http://www.webtoolkit.info/"><img class="ie6fix" src="http://www.webtoolkit.info/logo.png" alt="http://www.webtoolkit.info" /></a></h2>
+			
+			
+			
+			
+			<div id="headextras" class='rounded'>
+			
+				<form method="get" id="searchform" action="http://www.webtoolkit.info/">
+<div><input type="text" class='rounded text_input' value="" name="s" id="s" />
+<input type="submit" class="button ie6fix" id="searchsubmit" value="." />
+</div>
+</form>
+				
+				<ul class="social_bookmarks">
+					<li class='email'><a class='ie6fix' href='http://www.webtoolkit.info/contact'>E-mail</a></li>
+
+					<li class='rss'><a class='ie6fix' href="http://www.webtoolkit.info/feed">RSS</a></li>
+					
+					
+					
+				</ul><!-- end social_bookmarks-->
+			
+			<!-- end headextras: --> 
+			</div>
+			
+			
+		<!--end head-->
+		</div>
+		
+	<!-- end center-->
+	</div>
+<!--end wrapper-->
+
+</div>
+
+
+<div class="wrapper" id='wrapper_main'>
+
+	<div class="center">
+	<!-- BuySellAds.com Zone Code -->
+<div id="bsap_1244862" class="bsarocks bsap_c4bb71779db1d810a9cb3f0af7f2592d" align="center" style="padding-top:20px;"></div>
+<!-- END BuySellAds.com Zone Code -->
+<div id="main"> 
+	 <div class="content"> 
+	 <div class="entry"> 
+	
+	           
+	           <div class="entry-head  bloghead">
+	           	   <h1 class="siteheading">
+
+						<a href="http://www.webtoolkit.info/demo/javascript-drag-and-drop" rel="bookmark" title="Permanent Link: Javascript drag and drop">
+						Javascript drag and drop						</a>
+					</h1>
+	           </div>
+	          
+	           
+	           <div class="entry-content  archiveentry">
+	           
+	           <div id="container">
+<div id="info">Start drag process&#8230;</div>
+<div id="dragable1" style="position: relative; width: 50px; height: 50px; background: silver; border: 1px dashed red;"></div>
+<div id="dragable2" style="position: relative; width: 60px; height: 60px; background: silver; border: 1px dashed red;"></div>
+
+<div id="dragable3" style="position: relative; width: 70px; height: 70px; background: silver; border: 1px dashed red;"></div>
+<p><script type="text/javascript" src="/djs/webtoolkit.drag1.js"></script></p>
+<h2><a href="/javascript-drag-and-drop.html" title="Back to Post">&laquo; Back</a></h2>
+</div>
+	 				 			<!--end entry-content-->
+	 			</div>
+	 			
+	 			
+
+ 			</div></div><div class='sidebar'><div id="categories-4" class="box_small box widget widget_categories"><h3 class="widgettitle">categories </h3>		<ul>
+	<li class="cat-item cat-item-6"><a href="http://www.webtoolkit.info/actionscript" title="Actionscript Tutorials">Actionscript</a>
+
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.webtoolkit.info/css" title="CSS">CSS</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.webtoolkit.info/experiments" title="Experiments">Experiments</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.webtoolkit.info/free-graphics" title="View all posts filed under Free Graphics">Free Graphics</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.webtoolkit.info/free-themes" title="Free Wordpress, Drupal, Joomla and Blogger Templates">Free Themes</a>
+</li>
+
+	<li class="cat-item cat-item-4"><a href="http://www.webtoolkit.info/javascript" title="Javascript Tutorials">Javascript</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.webtoolkit.info/php" title="PHP">PHP</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.webtoolkit.info/tutorials" title="Tutorials">Tutorials</a>
+</li>
+		</ul>
+</div><div id="text-4" class="box_small box widget widget_text">			<div class="textwidget">
+<!-- BuySellAds.com Zone Code -->
+
+<div id="bsap_1238925" class="bsarocks bsap_c4bb71779db1d810a9cb3f0af7f2592d"></div>
+<!-- End BuySellAds.com Zone Code -->
+
+<!-- BuySellAds.com Zone Code -->
+<div id="bsap_1237946" class="bsarocks bsap_c4bb71779db1d810a9cb3f0af7f2592d"></div>
+<!-- END BuySellAds.com Zone Code -->
+
+
+</div>
+		</div><div id="partners" class="box_small box">
+<h3>Our Partners</h3>
+
+<ul style="list-style-type: none; list-style-position: outside; padding: 0px; margin: 0px;line-height: 16px;">
+<li>  <a href="http://www.freezone.co.uk">WebSite Hosting</a>  by Freezone.co.uk</li>
+
+<li>Download  <a href="http://www.refog.com">Keylogger</a>  for Windows</li>
+<li>Sonderposten im  <a href="http://www.dantotop.de">Restposten Shop</a>  kaufen</li>
+<li>  <a href="http://www.ajax-image-editor.com/">AIE (Ajax Image Editor)</a>  </li>
+<li>  <a href="http://www.northwestpharmacy.com">Canadian Online Pharmacy</a>  </li>
+
+<li>  <a href="http://www.reputationdefenderblog.com/2010/05/06/mario-armstrong-recommends-reputationdefender-on-cnn-saturday-morning/">Reputation Defender</a>  </li>
+<li>  <a href="http://www.getfave.com/4243579-care-one-llc">Care One, LLC</a>  </li>
+<li>  <a href="http://www.seo-optimization-experts.com">Seo Expert India</a>  </li>
+<li>  <a href="http://www.thinkbigsites.com/">seo</a>  </li>
+</ul><ul style="list-style-type: none; list-style-position: outside; padding: 0px; margin: 0px; line-height: 16px;">
+
+<li><a href="http://www.weonea.com/" title="Creer son site pro">Creer son site pro</a></li>
+<li><a href="http://www.yoolight.fr/" title="Referencement internet">Referencement internet</a></li>
+
+</ul>
+
+
+
+
+
+</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0558396375697376";
+/* 160x600, Erstellt 24.12.10 */
+google_ad_slot = "2417890154";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>	         			<!--end main-->
+		</div>
+	<!-- end center-->
+	</div>
+<!--end wrapper-->
+</div>
+
+
+<div id="footer_wrapper">
+<div id="footer">
+ <div class="col1">Copyright &copy; 2011 &middot; <a href="/" title="webtoolkit.info">webtoolkit.info</a> &middot;  <a href="/licence.html">Licence</a> &middot; <a href="/contact">Contact</a></div>
+
+    <div class="clearboth"></div>
+</div><!-- END "div#footer" -->
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ratingsL10n = {
+	plugin_url: "http://www.webtoolkit.info/wp-content/plugins/wp-postratings",
+	ajax_url: "http://www.webtoolkit.info/wp-content/plugins/wp-postratings/wp-postratings.php",
+	text_wait: "Please rate only 1 post at a time.",
+	image: "stars_crystal",
+	image_ext: "gif",
+	max: "5",
+	show_loading: "1",
+	show_fading: "1",
+	custom: "0"
+};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src=ratingsL10n.plugin_url+"/images/"+ratingsL10n.image+"/rating_over."+ratingsL10n.image_ext;
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.webtoolkit.info/wp-content/plugins/wp-postratings/postratings-js.js?ver=1.50'></script>
+<script type='text/javascript' src='http://www.webtoolkit.info/wp-includes/js/jquery/jquery.form.js?ver=2.02m'></script>
+<script type='text/javascript' src='http://www.webtoolkit.info/wp-content/plugins/contact-form-7/contact-form-7.js?ver=2.0.7'></script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-880358-9");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+		
+</body>
+</html>			
+<!-- Dynamic page generated in 0.851 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2011-01-21 14:37:39 -->
+<!-- super cache -->
