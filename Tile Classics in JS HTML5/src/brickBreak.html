@@ -23,6 +23,7 @@
     var ballXSpeed = 8, ballYSpeed = 6;
     var paddleX;
     var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
+    var score = 0;
 
 	window.onload = function() {
         canvas = document.getElementById('gameCanvas');
@@ -81,6 +82,15 @@
         if (ballY >= canvas.height) {
             ballReset();
         }
+
+        var brickX = Math.floor(ballX / BRICK_W);
+        var brickY = Math.floor(ballY / BRICK_H);
+        if (isBrickAtTileCoord(brickX, brickY)) {
+            var brickIndex = brickX + BRICK_COLS * brickY;
+            brickGrid[brickIndex] = 0;
+            score++;
+            ballYSpeed *= -1;
+        }
     }
 
     function drawEverything() {
@@ -98,7 +108,8 @@
             colorCircle(ballX, ballY, BALL_RADIUS, 'white');
         }
 
-        colorText("PaddleX: " + paddleX, 100, canvas.height-100, 'white');
+        colorText("PaddleX: " + paddleX, 10, canvas.height-20, 'white');
+        colorText("Score: " + score, 110, canvas.height-20, 'white');
     }
 
     function drawBricks(fillColor) {
@@ -113,6 +124,9 @@
     }
 
     function isBrickAtTileCoord(brickTileCol, brickTileRow) {
+        if (brickTileCol < 0 || brickTileCol >= BRICK_COLS) return false;
+        if (brickTileRow < 0 || brickTileRow >= BRICK_ROWS) return false;
+
         var brickIndex = brickTileCol + BRICK_COLS * brickTileRow;
         return (brickGrid[brickIndex] == 1);
     }
@@ -124,11 +138,12 @@
 
     function bricksReset() {
         for (var i = 0; i < BRICK_COLS * BRICK_ROWS; i++) {
-            if (Math.random() < 0.5) {
-                brickGrid[i] = 1;
-            } else {
-                brickGrid[i] = 0;
-            }
+            // if (Math.random() < 0.5) {
+            //     brickGrid[i] = 1;
+            // } else {
+            //     brickGrid[i] = 0;
+            // }
+            brickGrid[i] = 1;
         }
     }
 
